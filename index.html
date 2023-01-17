@@ -12,20 +12,33 @@
         <!--Assets-->
         <a-assets>
             <!--Images-->
-            <img id="paintingsFloor" src="./assets/paintingsFloor.jpg">
+            <img id="paintingsFloor" src="./assets/images/paintingsFloor.jpg">
+            <img id="ceiling" src="./assets/images/ceiling.jpg">
+            <img id="info" src="./assets/images/info.png">
+
+            <!--Models-->
+            <a-asset-item id="door" src="assets/door/scene.gltf"></a-asset-item>
+            <a-asset-item id="lamp" src="assets/lamp/scene.gltf"></a-asset-item>
 
             <!--Statues-->
-            <a-asset-item id="statue1" src="assets/statue1/scene.gltf"></a-asset-item>
-            <a-asset-item id="statue2" src="assets/statue2/scene.gltf"></a-asset-item>
-            <a-asset-item id="statue3" src="assets/statue3/scene.gltf"></a-asset-item>
-            <a-asset-item id="statue4" src="assets/statue4/scene.gltf"></a-asset-item>
+            <a-asset-item id="statue1" src="assets/statues/statue1/scene.gltf"></a-asset-item>
+            <a-asset-item id="statue2" src="assets/statues/statue2/scene.gltf"></a-asset-item>
+            <a-asset-item id="statue3" src="assets/statues/statue3/scene.gltf"></a-asset-item>
+            <a-asset-item id="statue4" src="assets/statues/statue4/scene.gltf"></a-asset-item>
 
-            <a-asset-item id="door" src="assets/door/scene.gltf"></a-asset-item>
-
-
+            <!--Paintings-->
+            <img id="monaLisa" src="assets/paintings/monaLisa.jpg"></img>
+            <img id="americanGothic" src="assets/paintings/americanGothic.jpg"></img>
+            <img id="girlWithPearlEarring" src="assets/paintings/girlWithPearlEarring.jpg"></img>
+            <img id="theScream" src="assets/paintings/theScream.jpg"></img>
+            <img id="theSonOfMan" src="assets/paintings/theSonOfMan.jpg"></img>
+            <img id="wandererAboveSeaOfFog" src="assets/paintings/wandererAboveSeaOfFog.jpg"></img>
+            <img id="starryNight" src="assets/paintings/starryNight.jpg"></img>
+            <img id="theLastSupper" src="assets/paintings/theLastSupper.jpg"></img>
         </a-assets>
 
-        <a-camera>
+        <!--Camera-->
+        <a-camera id="camera">
             <a-entity cursor="fuse: true; fuseTimeout: 2000" position="0 0 -1" raycaster="objects: .clickable"
                 geometry="primitive: sphere; radius: 0.01" material="color: #000000;shader: flat; opacity: 0.5">
                 <a-animation attribute="scale" to="3 3 3" dur="2000" begin="cursor-fusing" fill="backwards"
@@ -35,55 +48,148 @@
         </a-camera>
 
         <!--Main menu scene-->
-        <a-entity id="menuScene" visible="true">
+        <a-entity id="menuScene" visible="false">
             <a-sky color="gray"></a-sky>
-            <a-plane id="title" color="#aec39b" position="0 5 -9" scale="12 2 0.1">
+            <a-plane id="title" color="#aec39b" position="0 5 -9" scale="12 2 0.1" material="side: double">
                 <a-text value="WebVR group project" position="-0.45 0 0.1" color="black" scale="0.425 2 1">
                 </a-text>
             </a-plane>
             <a-plane id="startButton" class="clickable" color="#aec39b" position="0 2.5 -9" scale="3 1 0.1"
-            onclick="setPaintingsScene()">
+                onclick="setPaintingsScene()" material="side: double">
                 <a-text value="Start" position="-0.45 0 0.1" color="black" scale="1.7 4 1">
                 </a-text>
             </a-plane>
             <a-plane id="aboutButton" class="clickable" color="#aec39b" position="0 1 -9" scale="3 1 0.1"
-                event-set__enter="_event: click; _target: #aboutText; visible: true"
+                material="side: double" event-set__enter="_event: click; _target: #aboutText; visible: true"
                 event-set__leave="_event: mouseleave; _target: #aboutText; visible: false">
                 <a-text value="About" position="-0.45 0 0.1" color="black" scale="1.4 4 1">
                 </a-text>
             </a-plane>
             <a-text id="aboutText"
                 value="WebVR group project \n Made by \n\n Bryan Miranda \n Fernando Esquivel \n Rodrigo Solís"
-                align="center" color="#FFF" visible="false" position="0 0 -3" rotation="-10 0 0"
+                align="center" color="#FFF" visible="false" position="0 0 -7" rotation="-10 0 0"
                 geometry="primitive: plane; width: 2.3; height: 1.6;" scale="1 1 1" material="color: #333"></a-text>
             <a-box color="green" position="0 0 0" class="clickable" onclick="setPaintingsScene()"></a-box>
         </a-entity>
 
         <!--Paintings scene-->
-        <a-entity id="paintingsScene" visible="false">
+        <a-entity id="paintingsScene" visible="true">
+
             <a-plane id="floor" src="#paintingsFloor" rotation="-90 0 0" position="0 -0.5 0" width="15" height="15"
                 repeat="5 5"></a-plane>
-            <a-plane id="floor" color="gray" rotation="0 -90 0" position="7.5 3 0" width="15" height="7" repeat="5 5">
+            <a-plane id="ceiling" src="#ceiling" rotation="90 0 0" position="0 6 0" width="15" height="15"
+                repeat="5 5"></a-plane>
+            <a-plane id="wall" color="gray" rotation="0 -90 0" position="7.5 3 0" width="15" height="7" repeat="5 5">
             </a-plane>
-            <a-plane id="floor" color="gray" rotation="0 180 0" position="0 3 7.5" width="15" height="7" repeat="5 5">
+            <a-plane id="wall" color="gray" rotation="0 180 0" position="0 3 7.5" width="15" height="7" repeat="5 5">
             </a-plane>
-            <a-plane id="floor" color="gray" rotation="0 90 0" position="-7.5 3 0" width="15" height="7" repeat="5 5">
+            <a-plane id="wall" color="gray" rotation="0 90 0" position="-7.5 3 0" width="15" height="7" repeat="5 5">
             </a-plane>
-            <a-plane id="floor" color="gray" rotation="0 0 0" position="0 3 -7.5" width="15" height="7" repeat="5 5">
+            <a-plane id="wall" color="gray" rotation="0 0 0" position="0 3 -7.5" width="15" height="7" repeat="5 5">
             </a-plane>
 
             <!--Door-->
             <a-entity gltf-model="#door" class="clickable" position="7.5 1.2 0" scale="0.02 0.017 0.02"
                 rotation="0 0 0">
             </a-entity>
-            <a-box position="7.3.7 1 0" class="clickable" scale="0.1 4 1.7" visible="true" opacity="0"
-                event-set__enter="_event: mouseenter; _target: #nextGalleryText; visible: true"
+            <a-box id="paintingsDoorBox" position="7.3.7 1 0" class="clickable" scale="0.1 4 1.7" visible="true"
+                opacity="0" event-set__enter="_event: mouseenter; _target: #nextGalleryText; visible: true"
                 event-set__leave="_event: mouseleave; _target: #nextGalleryText; visible: false"
                 onclick="setStatuesScene()">
                 <a-text id="nextGalleryText" value="Next gallery" align="center" color="#FFF" visible="false"
                     position="0.5 -0.1 0" rotation="0 -90 0" geometry="primitive: plane; width: 1.5; height: 0.5;"
                     scale="0.7 0.5 0.5" material="color: #333"></a-text>
             </a-box>
+
+            <!--Mona Lisa-->
+            <a-entity gltf-model="#lamp" position="-6.9 4 3" scale="0.005 0.005 0.005" rotation="0 90 0"></a-entity>
+            <a-image src="#monaLisa" height="3" width="3" position="-7.4 2.5 3" rotation="0 90 0"></a-image>
+            <a-image class="clickable" src="#info" height="0.5" width="0.5" position="-7.3 1 3" rotation="0 90 0"
+                event-set__enter="_event: click; _target: #monaLisaAbout; visible: true"
+                event-set__leave="_event: mouseleave; _target: #monaLisaAbout; visible: false"></a-image>
+            <a-text id="monaLisaAbout" value="Mona Lisa, Leonardo Davinci (around 1503)." align="center" color="#FFF"
+                visible="false" position="-7.2 1 3" rotation="0 90 0"
+                geometry="primitive: plane; width: 4.5; height: 0.6;" scale="0.5 0.5 0.5"
+                material="color: #333"></a-text>
+
+            <!--The Scream-->
+            <a-entity gltf-model="#lamp" position="-6.9 4 -3" scale="0.005 0.005 0.005" rotation="0 90 0"></a-entity>
+            <a-image src="#theScream" height="3" width="3" position="-7.4 2.5 -3" rotation="0 90 0"></a-image>
+            <a-image class="clickable" src="#info" height="0.5" width="0.5" position="-7.3 1 -3" rotation="0 90 0"
+                event-set__enter="_event: click; _target: #theScreamAbout; visible: true"
+                event-set__leave="_event: mouseleave; _target: #theScreamAbout; visible: false"></a-image>
+            <a-text id="theScreamAbout" value="The Scream, Edvard Munch (1893)." align="center" color="#FFF"
+                visible="false" position="-7.2 1 -3" rotation="0 90 0"
+                geometry="primitive: plane; width: 3.8; height: 0.6;" scale="0.5 0.5 0.5"
+                material="color: #333"></a-text>
+
+            <!--The Last Supper-->
+            <a-entity gltf-model="#lamp" position="6.9 4 4" scale="0.005 0.005 0.005" rotation="0 -90 0"></a-entity>
+            <a-image src="#theLastSupper" height="3" width="4" position="7.4 2.5 4" rotation="0 -90 0"></a-image>
+            <a-image class="clickable" src="#info" height="0.5" width="0.5" position="7.3 1 4" rotation="0 -90 0"
+                event-set__enter="_event: click; _target: #theLastSupperAbout; visible: true"
+                event-set__leave="_event: mouseleave; _target: #theLastSupperAbout; visible: false"></a-image>
+            <a-text id="theLastSupperAbout" value="The Last Supper, Leonardo Da Vinci (around 1495)." align="center"
+                color="#FFF" visible="false" position="7.2 1 4" rotation="0 -90 0"
+                geometry="primitive: plane; width: 5.2; height: 0.6;" scale="0.5 0.5 0.5"
+                material="color: #333"></a-text>></a-image>
+
+            <!--Starry Night-->
+            <a-entity gltf-model="#lamp" position="6.9 4 -4" scale="0.005 0.005 0.005" rotation="0 -90 0"></a-entity>
+            <a-image src="#starryNight" height="3" width="4" position="7.4 2.5 -4" rotation="0 -90 0"></a-image>
+            <a-image class="clickable" src="#info" height="0.5" width="0.5" position="7.3 1 -4" rotation="0 -90 0"
+                event-set__enter="_event: click; _target: #starryNightAbout; visible: true"
+                event-set__leave="_event: mouseleave; _target: #starryNightAbout; visible: false"></a-image>
+            <a-text id="starryNightAbout" value="Starry Night, Vincent van Gogh (1889)." align="center" color="#FFF"
+                visible="false" position="7.2 1 -4" rotation="0 -90 0"
+                geometry="primitive: plane; width: 4.2; height: 0.6;" scale="0.5 0.5 0.5"
+                material="color: #333"></a-text></a-image>
+
+            <!--Girl with a Pearl Earring-->
+            <a-entity gltf-model="#lamp" position="3 4 6.9" scale="0.005 0.005 0.005" rotation="0 180 0"></a-entity>
+            <a-image src="#girlWithPearlEarring" height="3" width="3" position="3 2.5 7.4" rotation="0 180 0"></a-image>
+            <a-image class="clickable" src="#info" height="0.5" width="0.5" position="3 1 7.3" rotation="0 180 0"
+                event-set__enter="_event: click; _target: #girlWithPearlAbout; visible: true"
+                event-set__leave="_event: mouseleave; _target: #girlWithPearlAbout; visible: false"></a-image>
+            <a-text id="girlWithPearlAbout" value="Girl With A Pearl Earring, Johannes Vermeer (1665)." align="center"
+                color="#FFF" visible="false" position="3 1 7.2" rotation="0 180 0"
+                geometry="primitive: plane; width: 5; height: 0.6;" scale="0.5 0.5 0.5"
+                material="color: #333"></a-text></a-image>></a-image>
+
+            <!--American Gothic-->
+            <a-entity gltf-model="#lamp" position="-3 4 6.9" scale="0.005 0.005 0.005" rotation="0 180 0"></a-entity>
+            <a-image src="#americanGothic" height="3" width="3" position="-3 2.5 7.4" rotation="0 180 0"></a-image>
+            <a-image class="clickable" src="#info" height="0.5" width="0.5" position="-3 1 7.3" rotation="0 180 0"
+                event-set__enter="_event: click; _target: #americanGothicAbout; visible: true"
+                event-set__leave="_event: mouseleave; _target: #americanGothicAbout; visible: false"></a-image>
+            <a-text id="americanGothicAbout" value="American Gothic, Grant Wood (1930)." align="center" color="#FFF"
+                visible="false" position="-3 1 7.2" rotation="0 180 0"
+                geometry="primitive: plane; width: 4; height: 0.6;" scale="0.5 0.5 0.5"
+                material="color: #333"></a-text></a-image>></a-image>
+
+            <!--Wanderer Above Sea of Fog-->
+            <a-entity gltf-model="#lamp" position="-3 4 -6.9" scale="0.005 0.005 0.005" rotation="0 0 0"></a-entity>
+            <a-image src="#wandererAboveSeaOfFog" height="3" width="3" position="-3 2.5 -7.4"
+                rotation="0 0 0"></a-image>
+            <a-image class="clickable" src="#info" height="0.5" width="0.5" position="-3 1 -7.3" rotation="0 0 0"
+                event-set__enter="_event: click; _target: #wandererAbout; visible: true"
+                event-set__leave="_event: mouseleave; _target: #wandererAbout; visible: false"></a-image>
+            <a-text id="wandererAbout" value="Wanderer Above Sea of Fog, Caspar David Friedrich (1818)." align="center"
+                color="#FFF" visible="false" position="-3 1 -7.2" rotation="0 0 0"
+                geometry="primitive: plane; width: 4.5; height: 0.6;" scale="0.5 0.5 0.5"
+                material="color: #333"></a-text></a-image>
+
+            <!--The Son of Man-->
+            <a-entity gltf-model="#lamp" position="3 4 -6.9" scale="0.005 0.005 0.005" rotation="0 0 0"></a-entity>
+            <a-image src="#theSonOfMan" height="3" width="3" position="3 2.5 -7.4" rotation="0 0 0"></a-image>
+            <a-image class="clickable" src="#info" height="0.5" width="0.5" position="3 1 -7.3" rotation="0 0 0"
+                event-set__enter="_event: click; _target: #sonOfManAbout; visible: true"
+                event-set__leave="_event: mouseleave; _target: #sonOfManAbout; visible: false"></a-image>
+            <a-text id="sonOfManAbout" value="The Son Of Man, René Magritte (1964)." align="center" color="#FFF"
+                visible="false" position="3 1 -7.2" rotation="0 0 0"
+                geometry="primitive: plane; width: 4.5; height: 0.6;" scale="0.5 0.5 0.5"
+                material="color: #333"></a-text></a-image>
+
         </a-entity>
 
         <!--Statues scene-->
@@ -108,21 +214,25 @@
         <!--Scene switch functions-->
         <script type="text/javascript">
             function setMenuScene() {
+                document.getElementById('camera').setAttribute('position', { x: 0, y: 1.6, z: 0 })
                 document.getElementById('flagsScene').setAttribute('visible', 'false')
                 document.getElementById('menuScene').setAttribute('visible', 'true')
             }
 
             function setPaintingsScene() {
+                document.getElementById('camera').setAttribute('position', { x: 0, y: 1.6, z: 0 })
                 document.getElementById('menuScene').setAttribute('visible', 'false')
                 document.getElementById('paintingsScene').setAttribute('visible', 'true')
             }
 
             function setStatuesScene() {
+                document.getElementById('camera').setAttribute('position', { x: 0, y: 1.6, z: 0 })
                 document.getElementById('paintingsScene').setAttribute('visible', 'false')
                 document.getElementById('statuesScene').setAttribute('visible', 'true')
             }
 
             function setFlagsScene() {
+                document.getElementById('camera').setAttribute('position', { x: 0, y: 1.6, z: 0 })
                 document.getElementById('statuesScene').setAttribute('visible', 'false')
                 document.getElementById('flagsScene').setAttribute('visible', 'true')
             }
