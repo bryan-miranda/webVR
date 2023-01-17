@@ -4,15 +4,130 @@
 <head>
     <title>WebVR group project</title>
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
 </head>
-<!-- test hola -->
+
 <body>
     <a-scene>
+        <!--Assets-->
         <a-assets>
-            <img id="piso" src="./assets/paintingsFloor.jpg">
+            <!--Images-->
+            <img id="paintingsFloor" src="./assets/paintingsFloor.jpg">
+
+            <!--Statues-->
+            <a-asset-item id="statue1" src="assets/statue1/scene.gltf"></a-asset-item>
+            <a-asset-item id="statue2" src="assets/statue2/scene.gltf"></a-asset-item>
+            <a-asset-item id="statue3" src="assets/statue3/scene.gltf"></a-asset-item>
+            <a-asset-item id="statue4" src="assets/statue4/scene.gltf"></a-asset-item>
+
+            <a-asset-item id="door" src="assets/door/scene.gltf"></a-asset-item>
+
+
         </a-assets>
-        <a-plane id="floor" src="#piso" rotation="-90 0 0" position="0 -0.5 0" width="15" height="15" repeat="5 5">
-        </a-plane>
+
+        <a-camera>
+            <a-entity cursor="fuse: true; fuseTimeout: 2000" position="0 0 -1" raycaster="objects: .clickable"
+                geometry="primitive: sphere; radius: 0.01" material="color: #000000;shader: flat; opacity: 0.5">
+                <a-animation attribute="scale" to="3 3 3" dur="2000" begin="cursor-fusing" fill="backwards"
+                    easing="linear">
+                </a-animation>
+            </a-entity>
+        </a-camera>
+
+        <!--Main menu scene-->
+        <a-entity id="menuScene" visible="true">
+            <a-sky color="gray"></a-sky>
+            <a-plane id="title" color="#aec39b" position="0 5 -9" scale="12 2 0.1">
+                <a-text value="WebVR group project" position="-0.45 0 0.1" color="black" scale="0.425 2 1">
+                </a-text>
+            </a-plane>
+            <a-plane id="startButton" class="clickable" color="#aec39b" position="0 2.5 -9" scale="3 1 0.1"
+            onclick="setPaintingsScene()">
+                <a-text value="Start" position="-0.45 0 0.1" color="black" scale="1.7 4 1">
+                </a-text>
+            </a-plane>
+            <a-plane id="aboutButton" class="clickable" color="#aec39b" position="0 1 -9" scale="3 1 0.1"
+                event-set__enter="_event: click; _target: #aboutText; visible: true"
+                event-set__leave="_event: mouseleave; _target: #aboutText; visible: false">
+                <a-text value="About" position="-0.45 0 0.1" color="black" scale="1.4 4 1">
+                </a-text>
+            </a-plane>
+            <a-text id="aboutText"
+                value="WebVR group project \n Made by \n\n Bryan Miranda \n Fernando Esquivel \n Rodrigo Solís"
+                align="center" color="#FFF" visible="false" position="0 0 -3" rotation="-10 0 0"
+                geometry="primitive: plane; width: 2.3; height: 1.6;" scale="1 1 1" material="color: #333"></a-text>
+            <a-box color="green" position="0 0 0" class="clickable" onclick="setPaintingsScene()"></a-box>
+        </a-entity>
+
+        <!--Paintings scene-->
+        <a-entity id="paintingsScene" visible="false">
+            <a-plane id="floor" src="#paintingsFloor" rotation="-90 0 0" position="0 -0.5 0" width="15" height="15"
+                repeat="5 5"></a-plane>
+            <a-plane id="floor" color="gray" rotation="0 -90 0" position="7.5 3 0" width="15" height="7" repeat="5 5">
+            </a-plane>
+            <a-plane id="floor" color="gray" rotation="0 180 0" position="0 3 7.5" width="15" height="7" repeat="5 5">
+            </a-plane>
+            <a-plane id="floor" color="gray" rotation="0 90 0" position="-7.5 3 0" width="15" height="7" repeat="5 5">
+            </a-plane>
+            <a-plane id="floor" color="gray" rotation="0 0 0" position="0 3 -7.5" width="15" height="7" repeat="5 5">
+            </a-plane>
+
+            <!--Door-->
+            <a-entity gltf-model="#door" class="clickable" position="7.5 1.2 0" scale="0.02 0.017 0.02"
+                rotation="0 0 0">
+            </a-entity>
+            <a-box position="7.3.7 1 0" class="clickable" scale="0.1 4 1.7" visible="true" opacity="0"
+                event-set__enter="_event: mouseenter; _target: #nextGalleryText; visible: true"
+                event-set__leave="_event: mouseleave; _target: #nextGalleryText; visible: false"
+                onclick="setStatuesScene()">
+                <a-text id="nextGalleryText" value="Next gallery" align="center" color="#FFF" visible="false"
+                    position="0.5 -0.1 0" rotation="0 -90 0" geometry="primitive: plane; width: 1.5; height: 0.5;"
+                    scale="0.7 0.5 0.5" material="color: #333"></a-text>
+            </a-box>
+        </a-entity>
+
+        <!--Statues scene-->
+        <a-entity id="statuesScene" visible="false">
+            <a-box color="blue" position="5 0 0" class="clickable" onclick="setFlagsScene()"></a-box>
+        </a-entity>
+
+        <!--Flags scene scene-->
+        <a-entity id="flagsScene" visible="false">
+            <a-box color="red" position="0 0 5" class="clickable" onclick="setMenuScene()"></a-box>
+        </a-entity>
+
+        <!--estatuas
+<a-entity gltf-model="#statue1" position="10 -0.5 0" scale="0.005 0.005 0.005" rotation="0 180 0"></a-entity>
+        <a-entity gltf-model="#statue2" position="0 -0.5 -15" scale="0.7 0.7 0.7" rotation="0 0 0"></a-entity>
+        <a-entity gltf-model="#statue3" position="0 -0.5 7" scale="0.008 0.008 0.008" rotation="0 0 0"></a-entity>
+        <a-entity gltf-model="#statue4" position="-6 -3.5 0" scale="1.5 1.5 1.5" rotation="0 90 0"></a-entity>
+
+        
+        -->
+
+        <!--Scene switch functions-->
+        <script type="text/javascript">
+            function setMenuScene() {
+                document.getElementById('flagsScene').setAttribute('visible', 'false')
+                document.getElementById('menuScene').setAttribute('visible', 'true')
+            }
+
+            function setPaintingsScene() {
+                document.getElementById('menuScene').setAttribute('visible', 'false')
+                document.getElementById('paintingsScene').setAttribute('visible', 'true')
+            }
+
+            function setStatuesScene() {
+                document.getElementById('paintingsScene').setAttribute('visible', 'false')
+                document.getElementById('statuesScene').setAttribute('visible', 'true')
+            }
+
+            function setFlagsScene() {
+                document.getElementById('statuesScene').setAttribute('visible', 'false')
+                document.getElementById('flagsScene').setAttribute('visible', 'true')
+            }
+        </script>
+
     </a-scene>
 </body>
 
