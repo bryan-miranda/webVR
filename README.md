@@ -10,6 +10,6 @@
 
 · `Bryan Miranda: 2019057616`
 
-· `Rodrigo Solís: `
+· `Rodrigo Solís: 2019180423`
 
 · `Fernando Esquivel: `
