@@ -19,6 +19,8 @@
             <!--Models-->
             <a-asset-item id="door" src="assets/door/scene.gltf"></a-asset-item>
             <a-asset-item id="lamp" src="assets/lamp/scene.gltf"></a-asset-item>
+            <a-asset-item id="park" src="assets/park/scene.gltf"></a-asset-item>
+            <a-asset-item id="showRoom" src="assets/showRoom/scene.gltf"></a-asset-item>
 
             <!--Statues-->
             <a-asset-item id="statue1" src="assets/statues/statue1/scene.gltf"></a-asset-item>
@@ -35,6 +37,12 @@
             <img id="wandererAboveSeaOfFog" src="assets/paintings/wandererAboveSeaOfFog.jpg"></img>
             <img id="starryNight" src="assets/paintings/starryNight.jpg"></img>
             <img id="theLastSupper" src="assets/paintings/theLastSupper.jpg"></img>
+
+            <!--Flags-->
+            <a-asset-item id="flagUK" src="assets/flags/flagUK/scene.gltf"></a-asset-item>
+            <a-asset-item id="flagUSA" src="assets/flags/flagUSA/scene.gltf"></a-asset-item>
+            <a-asset-item id="flagUSSR" src="assets/flags/flagUSSR/scene.gltf"></a-asset-item>
+            <a-asset-item id="flagRussia" src="assets/flags/flagRussia/scene.gltf"></a-asset-item>
         </a-assets>
 
         <!--Camera-->
@@ -48,7 +56,7 @@
         </a-camera>
 
         <!--Main menu scene-->
-        <a-entity id="menuScene" visible="true">
+        <a-entity id="menuScene" visible="false">
             <a-sky color="gray"></a-sky>
             <a-plane id="title" color="#aec39b" position="0 5 -9" scale="12 2 0.1" material="side: double">
                 <a-text value="WebVR group project" position="-0.45 0 0.1" color="black" scale="0.425 2 1">
@@ -69,7 +77,6 @@
                 value="WebVR group project \n Made by \n\n Bryan Miranda \n Fernando Esquivel \n Rodrigo Solís"
                 align="center" color="#FFF" visible="false" position="0 0 -7" rotation="-10 0 0"
                 geometry="primitive: plane; width: 2.3; height: 1.6;" scale="1 1 1" material="color: #333"></a-text>
-            <a-box color="green" position="0 0 0" class="clickable" onclick="setPaintingsScene()"></a-box>
         </a-entity>
 
         <!--Paintings scene-->
@@ -193,8 +200,16 @@
         </a-entity>
 
         <!--Statues scene-->
-        <a-entity id="statuesScene" visible="false">
-            <a-box color="blue" position="5 0 0" class="clickable" onclick="setFlagsScene()"></a-box>
+        <a-entity id="statuesScene" visible="true">
+            <!--
+            <a-entity gltf-model="#showRoom" position="7.5 0 0" scale="1 2 1"
+                rotation="0 0 0">
+            </a-entity>
+            
+            <a-entity gltf-model="#park" position="7.5 0 0" scale="1 0.7 1"
+                rotation="0 0 0">
+            </a-entity>
+            -->
         </a-entity>
 
         <!--Flags scene scene-->
