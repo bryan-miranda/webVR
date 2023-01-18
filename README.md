@@ -12,4 +12,4 @@
 
 · `Rodrigo Solís: 2019180423`
 
-· `Fernando Esquivel: 2019083691
+· `Fernando Esquivel: 2019083691`
