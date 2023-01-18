@@ -259,7 +259,25 @@
 
         <!--Flags scene-->
         <a-entity id="flagsScene" visible="false">
-            
+            <a-sky src="#sky"></a-sky>
+<a-entity gltf-model="#park" position="200 0 0" scale="1 0.7 1" rotation="0 0 0">
+    <a-entity gltf-model="#flagUK" position="10 0 0" scale="1 1 1" rotation="0 0 0"></a-entity>
+    <a-entity gltf-model="#flagUSA" position="-10 0 0" scale="1 1 1" rotation="0 0 0"></a-entity>
+    <a-entity gltf-model="#flagUSSR" position="0 0 -10" scale="1 1 1" rotation="0 0 0"></a-entity>
+    <a-entity gltf-model="#flagRussia" position="0 0 10" scale="1 1 1" rotation="0 0 0"></a-entity>
+
+    <a-cylinder id="ukCylinder" position="10 3 0" scale="0.75 6 0.75" opacity="0" class="clickable"
+        sound="src: #ukFlag; on: click;"></a-cylinder>
+    <a-cylinder id="usaCylinder" position="-10 3 0" scale="0.75 6 0.75" opacity="0" class="clickable"
+        sound="src: #usaFlag; on: click;"></a-cylinder>
+    <a-cylinder id="ussrCylinder" position="0 3 -10" scale="0.75 6 0.75" opacity="0" class="clickable"
+        sound="src: #ussrFlag; on: click;"></a-cylinder>
+    <a-cylinder id="russiaCylinder" position="0 3 10" scale="0.75 6 0.75" opacity="0" class="clickable"
+        sound="src: #russiaFlag; on: click;"></a-cylinder>
+
+    <a-entity gltf-model="#exit" position="0.5 2 31.5" scale="4 4 1" rotation="0 180 0"></a-entity>
+    <a-box class="clickable" position="-1.5 2 32" scale="4 4 0.1" opacity="0" onclick="setMenuScene()"></a-box>
+</a-entity>
         </a-entity>
 
         <!--Scene switch functions-->
