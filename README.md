@@ -9,11 +9,12 @@
 ## Installation and run
 
 Install five-server.
-· npm i -g five-server@latest
+
+-- npm i -g five-server@latest
 
 Run command in terminal, inside the folder with index.html.
 
-· five-server --port=8000  
+-- five-server --port=8000  
 
 ### Made by
 
