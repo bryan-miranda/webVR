@@ -6,7 +6,16 @@
 
 ·All assets are under the license of free use.
 
-## Made by
+## Installation and run
+
+Install five-server.
+· npm i -g five-server@latest
+
+Run command in terminal, inside the folder with index.html.
+
+· five-server --port=8000  
+
+### Made by
 
 · `Bryan Miranda: 2019057616`
 
