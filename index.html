@@ -15,12 +15,20 @@
             <img id="paintingsFloor" src="./assets/images/paintingsFloor.jpg">
             <img id="ceiling" src="./assets/images/ceiling.jpg">
             <img id="info" src="./assets/images/info.png">
+            <img id="sky" src="./assets/images/sky.jpg">
+
+            <!--Sounds-->
+            <audio id="ukFlag" src="./assets/sounds/ukFlag.mp3"></audio>
+            <audio id="usaFlag" src="./assets/sounds/usaFlag.mp3"></audio>
+            <audio id="ussrFlag" src="./assets/sounds/ussrFlag.mp3"></audio>
+            <audio id="russiaFlag" src="./assets/sounds/russiaFlag.mp3"></audio>
 
             <!--Models-->
             <a-asset-item id="door" src="assets/door/scene.gltf"></a-asset-item>
             <a-asset-item id="lamp" src="assets/lamp/scene.gltf"></a-asset-item>
             <a-asset-item id="park" src="assets/park/scene.gltf"></a-asset-item>
             <a-asset-item id="showRoom" src="assets/showRoom/scene.gltf"></a-asset-item>
+            <a-asset-item id="exit" src="assets/exit/scene.gltf"></a-asset-item>
 
             <!--Statues-->
             <a-asset-item id="statue1" src="assets/statues/statue1/scene.gltf"></a-asset-item>
@@ -56,7 +64,7 @@
         </a-camera>
 
         <!--Main menu scene-->
-        <a-entity id="menuScene" visible="false">
+        <a-entity id="menuScene" visible="true">
             <a-sky color="gray"></a-sky>
             <a-plane id="title" color="#aec39b" position="0 5 -9" scale="12 2 0.1" material="side: double">
                 <a-text value="WebVR group project" position="-0.45 0 0.1" color="black" scale="0.425 2 1">
@@ -139,7 +147,7 @@
             <a-text id="theLastSupperAbout" value="The Last Supper, Leonardo Da Vinci (around 1495)." align="center"
                 color="#FFF" visible="false" position="7.2 1 4" rotation="0 -90 0"
                 geometry="primitive: plane; width: 5.2; height: 0.6;" scale="0.5 0.5 0.5"
-                material="color: #333"></a-text>></a-image>
+                material="color: #333"></a-text></a-image>
 
             <!--Starry Night-->
             <a-entity gltf-model="#lamp" position="6.9 4 -4" scale="0.005 0.005 0.005" rotation="0 -90 0"></a-entity>
@@ -161,7 +169,7 @@
             <a-text id="girlWithPearlAbout" value="Girl With A Pearl Earring, Johannes Vermeer (1665)." align="center"
                 color="#FFF" visible="false" position="3 1 7.2" rotation="0 180 0"
                 geometry="primitive: plane; width: 5; height: 0.6;" scale="0.5 0.5 0.5"
-                material="color: #333"></a-text></a-image>></a-image>
+                material="color: #333"></a-text></a-image></a-image>
 
             <!--American Gothic-->
             <a-entity gltf-model="#lamp" position="-3 4 6.9" scale="0.005 0.005 0.005" rotation="0 180 0"></a-entity>
@@ -172,7 +180,7 @@
             <a-text id="americanGothicAbout" value="American Gothic, Grant Wood (1930)." align="center" color="#FFF"
                 visible="false" position="-3 1 7.2" rotation="0 180 0"
                 geometry="primitive: plane; width: 4; height: 0.6;" scale="0.5 0.5 0.5"
-                material="color: #333"></a-text></a-image>></a-image>
+                material="color: #333"></a-text></a-image></a-image>
 
             <!--Wanderer Above Sea of Fog-->
             <a-entity gltf-model="#lamp" position="-3 4 -6.9" scale="0.005 0.005 0.005" rotation="0 0 0"></a-entity>
@@ -200,36 +208,20 @@
         </a-entity>
 
         <!--Statues scene-->
-        <a-entity id="statuesScene" visible="true">
-            <!--
-            <a-entity gltf-model="#showRoom" position="7.5 0 0" scale="1 2 1"
-                rotation="0 0 0">
-            </a-entity>
+        <a-entity id="statuesScene" visible="false">
             
-            <a-entity gltf-model="#park" position="7.5 0 0" scale="1 0.7 1"
-                rotation="0 0 0">
-            </a-entity>
-            -->
         </a-entity>
 
         <!--Flags scene scene-->
         <a-entity id="flagsScene" visible="false">
-            <a-box color="red" position="0 0 5" class="clickable" onclick="setMenuScene()"></a-box>
+            
         </a-entity>
-
-        <!--estatuas
-<a-entity gltf-model="#statue1" position="10 -0.5 0" scale="0.005 0.005 0.005" rotation="0 180 0"></a-entity>
-        <a-entity gltf-model="#statue2" position="0 -0.5 -15" scale="0.7 0.7 0.7" rotation="0 0 0"></a-entity>
-        <a-entity gltf-model="#statue3" position="0 -0.5 7" scale="0.008 0.008 0.008" rotation="0 0 0"></a-entity>
-        <a-entity gltf-model="#statue4" position="-6 -3.5 0" scale="1.5 1.5 1.5" rotation="0 90 0"></a-entity>
-
-        
-        -->
 
         <!--Scene switch functions-->
         <script type="text/javascript">
             function setMenuScene() {
                 document.getElementById('camera').setAttribute('position', { x: 0, y: 1.6, z: 0 })
+                document.getElementById('camera').setAttribute('rotation', { x: 0, y: 0, z: 0 })
                 document.getElementById('flagsScene').setAttribute('visible', 'false')
                 document.getElementById('menuScene').setAttribute('visible', 'true')
             }
@@ -241,13 +233,13 @@
             }
 
             function setStatuesScene() {
-                document.getElementById('camera').setAttribute('position', { x: 0, y: 1.6, z: 0 })
+                document.getElementById('camera').setAttribute('position', { x: 100, y: 1.6, z: 0 })
                 document.getElementById('paintingsScene').setAttribute('visible', 'false')
                 document.getElementById('statuesScene').setAttribute('visible', 'true')
             }
 
             function setFlagsScene() {
-                document.getElementById('camera').setAttribute('position', { x: 0, y: 1.6, z: 0 })
+                document.getElementById('camera').setAttribute('position', { x: 200, y: 1.6, z: 22 })
                 document.getElementById('statuesScene').setAttribute('visible', 'false')
                 document.getElementById('flagsScene').setAttribute('visible', 'true')
             }
